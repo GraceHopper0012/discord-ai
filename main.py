@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 intents = discord.Intents.default()
-intent.message_content = True
+intents.message_content = True
 
 bot = commands.Bot(intents=intents)
 tree = bot.tree
@@ -25,6 +25,10 @@ async def talk(ctx, msg:str):
     embed = discord.Embed(title="", description=ai_response)
     await ctx.response.send_message(embed=embed)
 
+@tree.command(name="test", description="Test the bot")
+async def test(ctx):
+    embed = dicord.Embed(title="Hello")
+    await ctx.response.send_message(embed=embed)
 
 # @tree.command(name="react", description="Let the AI react to the current conversation")
 
