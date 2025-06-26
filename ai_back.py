@@ -1,6 +1,6 @@
 from transformers import TFAutoModelForCausalLM, AutoTokenizer, pipeline
 
-name = "microsoft/DialoGPT-small"
+name = "stefan-it/german-gpt2-larger"
 tok = AutoTokenizer.from_pretrained(name)
 model = TFAutoModelForCausalLM.from_pretrained(name)
 
