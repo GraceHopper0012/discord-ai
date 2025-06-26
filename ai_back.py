@@ -10,6 +10,7 @@ conversation_history = []
 
 while True:
     user_input = input("Du: ")
+    print(conversation_history)
     
     # Füge die neue Nachricht zur Konversation hinzu
     conversation_history.append({"role": "user", "content": user_input})
@@ -23,7 +24,7 @@ while True:
         input_text += f"{message['role']}: {message['content']}\n"
     
     # Generiere die Antwort
-    response = chat(input_text, max_length=150)[0]["generated_text"]
+    response = chat(input_text, max_length=50)[0]["generated_text"]
     
     # Extrahiere die Antwort des Bots
     bot_response = response.split("assistant:")[-1].strip()
