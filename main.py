@@ -36,6 +36,8 @@ async def talk(ctx, msg:str):
         input_text += f"{message['role']}: {message['content']}\n"
 
     ai_response = ai_back.respond(input_text=input_text)
+
+    conversation_history.append({"role": "assistant", "content": ai_response})
     embed = discord.Embed(title="", description=ai_response)
     await ctx.edit_original_response(content=None, embed=embed)
 
