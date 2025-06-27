@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 from discord import app_commands
 import os
+import ai_back
 
 load_dotenv()
 
@@ -21,7 +22,7 @@ async def on_ready():
 @tree.command(name="talk", description="Let the AI respond")
 @app_commands.describe(msg="The message to send to the AI")
 async def talk(ctx, msg:str):
-    ai_response = None # call Katja's function to talk to the AI here
+    ai_response = ai_back.respond(user_input=msg) # call Katja's function to talk to the AI here
     embed = discord.Embed(title="", description=ai_response)
     await ctx.response.send_message(embed=embed)
 
