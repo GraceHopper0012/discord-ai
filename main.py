@@ -24,6 +24,8 @@ async def on_ready():
 @tree.command(name="talk", description="Let the AI respond")
 @app_commands.describe(msg="The message to send to the AI")
 async def talk(ctx, msg:str):
+    # circumvent timeout
+    await ctx.response.send_message("Wird generiert...")
     global talk_history
     talk_history.append({"role": "user", "content": msg})
 
@@ -35,7 +37,7 @@ async def talk(ctx, msg:str):
 
     ai_response = ai_back.respond(input_text=input_text)
     embed = discord.Embed(title="", description=ai_response)
-    await ctx.response.send_message(embed=embed)
+    await ctx.edit_original_response(content=None, embed=embed)
 
 @tree.command(name="test", description="Test the bot")
 async def test(ctx):
