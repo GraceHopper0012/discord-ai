@@ -44,9 +44,10 @@ async def talk(ctx, msg:str):
     input_text = ""
     for message in user_history:
         input_text += f"{message['role']}: {message['content']}\n"
-
     async with lock:
         ai_response = await asyncio.to_thread(ai_back.respond, input_text)
+    # async with lock:
+    #     ai_response = await asyncio.to_thread(ai_back.respond, input_text)
 
     user_history.append({"role": "assistant", "content": ai_response})
     embed = discord.Embed(title="", description=ai_response)
