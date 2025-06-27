@@ -14,7 +14,7 @@ def respond(input_text):
     
     response = chat(input_text, max_new_tokens=50)[0]["generated_text"]
     
-    bot_response = response.split("assistant:")[-1].strip()
+    bot_response = response.strip()
     
     print("Bot:", bot_response)
     
