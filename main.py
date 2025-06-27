@@ -14,6 +14,8 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="%", intents=intents)
 tree = bot.tree
 
+talk_history = []
+
 @bot.event
 async def on_ready():
     synced = await bot.tree.sync(guild=None)
@@ -22,7 +24,16 @@ async def on_ready():
 @tree.command(name="talk", description="Let the AI respond")
 @app_commands.describe(msg="The message to send to the AI")
 async def talk(ctx, msg:str):
-    ai_response = ai_back.respond(user_input=msg) # call Katja's function to talk to the AI here
+    global talk_history
+    talk_history.append({"role": "user", "content": msg})
+
+    conversation_history = talk_history[-10:]
+
+    input_text = ""
+    for message in conversation_history:
+        input_text += f"{message['role']}: {message['content']}\n"
+
+    ai_response = ai_back.respond(input_text=input_text)
     embed = discord.Embed(title="", description=ai_response)
     await ctx.response.send_message(embed=embed)
 

@@ -8,16 +8,9 @@ chat = pipeline("text-generation", model=model, tokenizer=tokenizer, device=-1)
 
 conversation_history = []
 
-def respond(user_input):
+def respond(input_text):
     print(conversation_history)
-    
-    conversation_history.append({"role": "user", "content": user_input})
-    
-    conversation_history = conversation_history[-10:]
-    
-    input_text = ""
-    for message in conversation_history:
-        input_text += f"{message['role']}: {message['content']}\n"
+
     
     response = chat(input_text, max_new_tokens=50)[0]["generated_text"]
     
