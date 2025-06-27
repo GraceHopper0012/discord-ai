@@ -29,13 +29,15 @@ async def talk(ctx, msg:str):
     global talk_history
     talk_history.append({"role": "user", "content": msg})
 
-    conversation_history = talk_history[-10:]
+    talk_history = talk_history[-10:]
 
     input_text = ""
-    for message in conversation_history:
+    for message in talk_history:
         input_text += f"{message['role']}: {message['content']}\n"
 
     ai_response = ai_back.respond(input_text=input_text)
+
+    talk_history.append({"role": "assistant", "content": ai_response})
     embed = discord.Embed(title="", description=ai_response)
     await ctx.edit_original_response(content=None, embed=embed)
 
